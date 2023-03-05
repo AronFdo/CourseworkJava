@@ -1,8 +1,5 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static Scanner in = new Scanner(System.in);
@@ -10,7 +7,7 @@ public class Main {
     static int[] row2 = new int[16];
     static int[] row3 = new int[20];
 
-    static ArrayList<Ticket> tickets = new ArrayList<Ticket>();
+    static ArrayList<Ticket> tickets = new ArrayList<>();
     public static void main(String[] args) {
         System.out.println("Welcome to the New Theatre");
 
@@ -46,6 +43,9 @@ public class Main {
                 case 7:
                     show_tickets();
                     break;
+                case 8:
+                    sort_tickets();
+                    break;
                 case 0:
                     System.exit(0);
                 }
@@ -55,6 +55,7 @@ public class Main {
 
     }
     public static void buy_ticket(){
+
         System.out.println("Enter row number");
         int row_no = in.nextInt();
         while (row_no > 3 || row_no < 1){
@@ -97,16 +98,11 @@ public class Main {
         System.out.println("Enter your email: ");
         String email = in.next();
 
-        Random rand = new Random();
-        int user_id = rand.nextInt(0,10);
-        int ticket_id = rand.nextInt(0,100);
 
         Person user = new Person(firstname, lastname, email);
-        Ticket new_ticket = new Ticket(row_no,seat_no,price, user);
-        tickets.add(new_ticket);
+        Ticket ticket1 = new Ticket(row_no,seat_no,price, user);
+        tickets.add(ticket1);
         System.out.println(tickets.size());
-
-
 
     }
     public static void print_seating_area(){
@@ -256,10 +252,24 @@ public class Main {
 
     }
     public static void show_tickets(){
+        double total = 0;
         for (Ticket ticket : tickets) {
             ticket.print();
+            total = total + ticket.getPrice();
         }
+        System.out.println("Your total is: "+total);
 
 
+    }
+    public static void sort_tickets(){
+        Collections.sort(tickets, new Comparator<Ticket>() {
+            @Override
+            public int compare(Ticket o1, Ticket o2) {
+                return Double.compare(o1.getPrice(), o2.getPrice());
+            }
+        });
+        for (Ticket ticket: tickets){
+            ticket.print();
+        }
     }
 }

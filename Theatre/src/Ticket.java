@@ -1,8 +1,8 @@
 public class Ticket {
-    private static int row;
-    private static int seat;
-    private static double price;
-    private static Person person;
+    private int row;
+    private int seat;
+    private double price;
+    private Person person;
 
     public Ticket(int row, int seat, double price, Person person){
         this.row = row;
@@ -11,13 +11,13 @@ public class Ticket {
         this.person = person;
     }
 
-    public static int getRow(){
+    public int getRow(){
         return row;
     }
-    public static int getSeat(){
+    public int getSeat(){
         return seat;
     }
-    public static double getPrice(){
+    public double getPrice(){
         return price;
     }
     public Person getPerson() {
