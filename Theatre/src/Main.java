@@ -159,7 +159,7 @@ public class Main {
         System.out.println("Please enter row number: ");
         int row_cancel = in.nextInt();
         while ( row_cancel > 3 || row_cancel < 1){
-            System.out.println("Please enter correct row number");
+            System.out.println("Error: Incorrect row number. Please enter again: ");
             row_cancel = in.nextInt();
         }
         System.out.println("Please enter seat number: ");
@@ -168,22 +168,27 @@ public class Main {
         switch(row_cancel){
             case 1:
                 while(seat_cancel > row1.length || seat_cancel < 1){
-                    System.out.println("Please enter correct seat number");
+                    System.out.println("Error: Incorrect seat number. Please enter again: ");
                     seat_cancel = in.nextInt();
                 }
                 row1[seat_cancel-1] = 0;
             case 2:
                 while(seat_cancel > row2.length || seat_cancel < 1){
-                    System.out.println("Please enter correct seat number");
+                    System.out.println("Error: Incorrect seat number. Please enter again: ");
                     seat_cancel = in.nextInt();
                 }
                 row2[seat_cancel-1] = 0;
             case 3:
                 while(seat_cancel > row3.length || seat_cancel < 1){
-                    System.out.println("Please enter correct seat number");
+                    System.out.println("Error: Incorrect seat number. Please enter again: ");
                     seat_cancel = in.nextInt();
                 }
                 row3[seat_cancel-1] = 0;
+        }
+        for(Ticket ticket: tickets){
+            if (ticket.getRow()==row_cancel && ticket.getSeat()==seat_cancel){
+                tickets.remove(ticket);
+            }
         }
     }
     public static void show_available() {
